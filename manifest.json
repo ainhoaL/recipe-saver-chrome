@@ -1,0 +1,15 @@
+  {
+    "name": "Recipe Saver Chrome Extension",
+    "version": "1.0",
+    "description": "Save a recipe in Sugar Salt Butter",
+    "permissions": [
+        "storage",
+        "tabs",
+        "http://*/",
+        "https://*/"
+    ],
+    "browser_action": {
+      "default_popup": "popup.html"
+    },
+    "manifest_version": 2
+  }
