@@ -102,14 +102,15 @@ function saveRecipe() {
     // Get the status display DOM element so it can be updated
     let statusDisplay = document.getElementById('status-display');
 
-    let recipesUrl = 'http://localhost:3050/api/recipes';
+    let recipesUrl = 'http://localhost:3050/api/v1/recipes';
     let xhr = new XMLHttpRequest();
-    xhr.open('PUT', recipesUrl, true); // Creating a new recipe -> PUT method
+    xhr.open('POST', recipesUrl, true); // Creating a new recipe -> PUT method
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 
     // Get recipe object from form data
     let recipe = getValues();
     recipe.source = source;
+    recipe.userId = 'me';
 
     // Handle request state change events
     xhr.onreadystatechange = function () {
@@ -121,7 +122,7 @@ function saveRecipe() {
                 statusDisplay.innerHTML = 'Recipe saved';
                 window.setTimeout(window.close, 1000);
             } else {
-                statusDisplay.innerHTML = 'Error saving';
+                statusDisplay.innerHTML = 'Error saving ' + xhr.status;
             }
         }
     };
