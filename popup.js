@@ -125,7 +125,7 @@ function onTabInfoLoaded(pageDetails) {
                     checkRecipeDisplay.innerHTML = 'This recipe is already saved - LINK'; // TODO: add link to UI
                     document.getElementById('saverecipeform').style.display = 'none'
                 }
-            } else {
+            } else if (xhr.status !== 404) { // 404 is not an error, just says the recipe does not exist in the database
                 checkRecipeDisplay.innerHTML = 'Error checking for recipe ' + xhr.status;
             }
         }
