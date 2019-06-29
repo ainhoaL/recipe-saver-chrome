@@ -94,6 +94,7 @@ function saveData() {
 }
 
 var recipesUrl = 'http://localhost:3050/api/v1/recipes';
+var websiteRecipeUrl = 'http://localhost:3000/recipes/';
 
 // blog name as source for this recipe
 // var source = 'blog';
@@ -121,10 +122,10 @@ function onTabInfoLoaded(pageDetails) {
         if (xhr.readyState == 4) {
             checkRecipeDisplay.innerHTML = '';
             if (xhr.status == 200) {
-                if (xhr.response) {
-                    checkRecipeDisplay.innerHTML = 'This recipe is already saved - LINK'; // TODO: add link to UI
-                    document.getElementById('saverecipeform').style.display = 'none'
-                }
+                let data = xhr.responseText;
+                let jsonResponse = JSON.parse(data);
+                checkRecipeDisplay.innerHTML = 'This recipe is already saved - <a target="_blank" href="' + websiteRecipeUrl + jsonResponse._id + '">Open recipe in website</a>';
+                document.getElementById('saverecipeform').style.display = 'none'
             } else if (xhr.status !== 404) { // 404 is not an error, just says the recipe does not exist in the database
                 checkRecipeDisplay.innerHTML = 'Error checking for recipe ' + xhr.status;
             }
@@ -144,7 +145,7 @@ function onTabInfoLoaded(pageDetails) {
     });
 }
 
-// Send recipe to remote server
+// Send recipe to server
 function saveRecipe() {
     // Cancel the form submit
     event.preventDefault();
@@ -167,9 +168,10 @@ function saveRecipe() {
         if (xhr.readyState == 4) {
             statusDisplay.innerHTML = '';
             if (xhr.status == 200) {
+                let data = xhr.responseText;
+                let jsonResponse = JSON.parse(data);
                 // If it was a success, close the popup after a short delay
-                statusDisplay.innerHTML = 'Recipe saved'; // TODO: add link to UI
-                window.setTimeout(window.close, 1000);
+                statusDisplay.innerHTML = 'Recipe saved<br /><a target="_blank" href="' + websiteRecipeUrl + jsonResponse._id + '">Open recipe in website</a>';
             } else {
                 statusDisplay.innerHTML = 'Error saving ' + xhr.status;
             }
@@ -195,3 +197,9 @@ window.addEventListener('load', function (evt) {
     let recipeForm = document.getElementById('saverecipeform');
     recipeForm.onchange = saveData;
 });
+
+window.addEventListener('click',function(e){
+  if(e.target.href!==undefined){
+    chrome.tabs.create({url:e.target.href})
+  }
+})
