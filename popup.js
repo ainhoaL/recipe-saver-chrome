@@ -167,11 +167,15 @@ function saveRecipe() {
         // If the request completed
         if (xhr.readyState == 4) {
             statusDisplay.innerHTML = '';
+            let htmlToShow = '';
             if (xhr.status == 200) {
+                htmlToShow = 'Recipe saved';
                 let data = xhr.responseText;
                 let jsonResponse = JSON.parse(data);
-                // If it was a success, close the popup after a short delay
-                statusDisplay.innerHTML = 'Recipe saved<br /><a target="_blank" href="' + websiteRecipeUrl + jsonResponse._id + '">Open recipe in website</a>';
+                if (jsonResponse._id) { // Just in case we ever get a response without _id
+                   htmlToShow += '<br /><a target="_blank" href="' + websiteRecipeUrl + jsonResponse._id + '">Open recipe in website</a>';
+                }
+                statusDisplay.innerHTML = htmlToShow;
             } else {
                 statusDisplay.innerHTML = 'Error saving ' + xhr.status;
             }
@@ -202,4 +206,4 @@ window.addEventListener('click',function(e){
   if(e.target.href!==undefined){
     chrome.tabs.create({url:e.target.href})
   }
-})
+});
