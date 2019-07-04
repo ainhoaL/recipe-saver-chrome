@@ -1,23 +1,23 @@
 // Generate a recipe object with the data in the form
 function getValues() {
-    var title = document.getElementById('title');
-    var author = document.getElementById('author');
-    var source = document.getElementById('source');
-    var image = document.getElementById('image');
-    var ingredients = document.getElementById('ingredients');
-    var instructions = document.getElementById('instructions');
-    var notes = document.getElementById('notes');
-    var servings = document.getElementById('servings');
-    var cookingTime = document.getElementById('cookingTime');
-    var prepTime = document.getElementById('prepTime');
-    var storage = document.getElementById('storage');
-    var freezes = document.getElementById('freezes');
-    var calories = document.getElementById('calories');
-    var protein = document.getElementById('protein');
-    var carb = document.getElementById('carb');
-    var fat = document.getElementById('fat');
-    var tags = document.getElementById('tags');
-    var equipment = document.getElementById('equipment');
+    let title = document.getElementById('title');
+    let author = document.getElementById('author');
+    let source = document.getElementById('source');
+    let image = document.getElementById('image');
+    let ingredients = document.getElementById('ingredients');
+    let instructions = document.getElementById('instructions');
+    let notes = document.getElementById('notes');
+    let servings = document.getElementById('servings');
+    let cookingTime = document.getElementById('cookingTime');
+    let prepTime = document.getElementById('prepTime');
+    let storage = document.getElementById('storage');
+    let freezes = document.getElementById('freezes');
+    let calories = document.getElementById('calories');
+    let protein = document.getElementById('protein');
+    let carb = document.getElementById('carb');
+    let fat = document.getElementById('fat');
+    let tags = document.getElementById('tags');
+    let equipment = document.getElementById('equipment');
 
     return {
         title: title.value,
@@ -45,24 +45,24 @@ function getValues() {
 
 // Load form elements with recipe data
 function displayValues(recipeData) {
-    var title = document.getElementById('title');
-    var author = document.getElementById('author');
-    var source = document.getElementById('source');
-    var image = document.getElementById('image');
-    var ingredients = document.getElementById('ingredients');
-    var instructions = document.getElementById('instructions');
-    var notes = document.getElementById('notes');
-    var servings = document.getElementById('servings');
-    var cookingTime = document.getElementById('cookingTime');
-    var prepTime = document.getElementById('prepTime');
-    var storage = document.getElementById('storage');
-    var freezes = document.getElementById('freezes');
-    var calories = document.getElementById('calories');
-    var protein = document.getElementById('protein');
-    var carb = document.getElementById('carb');
-    var fat = document.getElementById('fat');
-    var tags = document.getElementById('tags');
-    var equipment = document.getElementById('equipment');
+    let title = document.getElementById('title');
+    let author = document.getElementById('author');
+    let source = document.getElementById('source');
+    let image = document.getElementById('image');
+    let ingredients = document.getElementById('ingredients');
+    let instructions = document.getElementById('instructions');
+    let notes = document.getElementById('notes');
+    let servings = document.getElementById('servings');
+    let cookingTime = document.getElementById('cookingTime');
+    let prepTime = document.getElementById('prepTime');
+    let storage = document.getElementById('storage');
+    let freezes = document.getElementById('freezes');
+    let calories = document.getElementById('calories');
+    let protein = document.getElementById('protein');
+    let carb = document.getElementById('carb');
+    let fat = document.getElementById('fat');
+    let tags = document.getElementById('tags');
+    let equipment = document.getElementById('equipment');
 
     title.value = recipeData.title;
     author.value = recipeData.author;
@@ -93,13 +93,11 @@ function saveData() {
     chrome.storage.local.set(dataToStore, () => { });
 }
 
-var recipesUrl = 'http://localhost:3050/api/v1/recipes';
-var websiteRecipeUrl = 'http://localhost:3000/recipes/';
+const recipesUrl = 'http://localhost:3050/api/v1/recipes';
+const websiteRecipeUrl = 'http://localhost:3000/recipes/';
 
-// blog name as source for this recipe
-// var source = 'blog';
 // url for this recipe
-var url;
+let url;
 
 // Get title and url from the tab info and load it on the form 
 function onTabInfoLoaded(pageDetails) {
@@ -124,7 +122,7 @@ function onTabInfoLoaded(pageDetails) {
             if (xhr.status == 200) {
                 let data = xhr.responseText;
                 let jsonResponse = JSON.parse(data);
-                checkRecipeDisplay.innerHTML = 'This recipe is already saved - <a target="_blank" href="' + websiteRecipeUrl + jsonResponse._id + '">Open recipe in website</a>';
+                checkRecipeDisplay.innerHTML = 'This recipe is already saved<br /><a target="_blank" href="' + websiteRecipeUrl + jsonResponse._id + '">Open recipe in website</a>';
                 document.getElementById('saverecipeform').style.display = 'none'
             } else if (xhr.status !== 404) { // 404 is not an error, just says the recipe does not exist in the database
                 checkRecipeDisplay.innerHTML = 'Error checking for recipe ' + xhr.status;
