@@ -171,7 +171,7 @@ function saveRecipe() {
                 let data = xhr.responseText;
                 let jsonResponse = JSON.parse(data);
                 if (jsonResponse._id) { // Just in case we ever get a response without _id
-                   htmlToShow += '<br /><a target="_blank" href="' + websiteRecipeUrl + jsonResponse._id + '">Open recipe in website</a>';
+                   htmlToShow += '<br /><a target="_blank" href="' + websiteRecipeUrl + jsonResponse._id + '?edit=true">Open recipe in website</a>';
                 }
                 statusDisplay.innerHTML = htmlToShow;
             } else {
