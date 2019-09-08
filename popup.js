@@ -99,6 +99,8 @@ const websiteRecipeUrl = 'http://localhost:3000/recipes/';
 // url for this recipe
 let url;
 
+let userToken;
+
 // Get title and url from the tab info and load it on the form 
 function onTabInfoLoaded(pageDetails) {
     document.getElementById('title').value = pageDetails[0].title;
@@ -111,8 +113,9 @@ function onTabInfoLoaded(pageDetails) {
     let checkRecipeDisplay = document.getElementById('recipe-exists');
 
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', recipesUrl + '/search?url=' + url + '&userId=me', true); // Check if recipe url has been saved already for this user
+    xhr.open('GET', recipesUrl + '/search?url=' + url, true); // Check if recipe url has been saved already for this user
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    xhr.setRequestHeader('Authorization', 'Bearer ' + userToken);
 
     // Handle request state change events
     xhr.onreadystatechange = function () {
@@ -153,12 +156,12 @@ function saveRecipe() {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', recipesUrl, true); // Creating a new recipe -> POST method
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    xhr.setRequestHeader('Authorization', 'Bearer ' + userToken);
 
     // Get recipe object from form data
     let recipe = getValues();
     recipe.url = url;
     // recipe.source = source;
-    recipe.userId = 'me'; // TODO: change for real user id - need user to log in?
 
     // Handle request state change events
     xhr.onreadystatechange = function () {
@@ -187,6 +190,10 @@ function saveRecipe() {
 
 // Popup loaded
 window.addEventListener('load', function (evt) {
+
+    chrome.identity.getAuthToken({interactive: true}, function(token) {
+        userToken = token;
+    });
 
     // Get information from the tab and populate form
     chrome.tabs.query({ active: true, currentWindow: true}, onTabInfoLoaded);
