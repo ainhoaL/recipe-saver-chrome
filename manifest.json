@@ -14,7 +14,7 @@
     },
     "oauth2": {
       "client_id": "CLIENT_ID",
-      "scopes":["profile", "openid"]
+      "scopes":["profile"]
     },
     "key": "APP_KEY",
     "manifest_version": 2
