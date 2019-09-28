@@ -6,10 +6,16 @@
         "storage",
         "tabs",
         "http://*/",
-        "https://*/"
+        "https://*/",
+        "identity"
     ],
     "browser_action": {
       "default_popup": "popup.html"
     },
+    "oauth2": {
+      "client_id": "CLIENT_ID",
+      "scopes":["profile"]
+    },
+    "key": "APP_KEY",
     "manifest_version": 2
   }
