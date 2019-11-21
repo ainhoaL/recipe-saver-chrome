@@ -11,13 +11,16 @@ function getValues() {
     let cookingTime = document.getElementById('cookingTime');
     let prepTime = document.getElementById('prepTime');
     let storage = document.getElementById('storage');
-    let freezes = document.getElementById('freezes');
+    let freezable = document.getElementById('freezable');
     let calories = document.getElementById('calories');
     let protein = document.getElementById('protein');
     let carb = document.getElementById('carb');
     let fat = document.getElementById('fat');
     let tags = document.getElementById('tags');
+    let rating = document.getElementById('rating');
     let equipment = document.getElementById('equipment');
+    let done = document.getElementById('done');
+    let wantToTry = document.getElementById('wantToTry');
 
     return {
         title: title.value,
@@ -31,15 +34,18 @@ function getValues() {
         cookingTime: cookingTime.value,
         prepTime: prepTime.value,
         storage: storage.value,
-        freezes: freezes.checked,
-        macros: {
+        freezable: freezable.checked,
+        nutrition: {
             calories: calories.value,
             protein: protein.value,
             carbs: carb.value,
             fat: fat.value
         },
         equipment: equipment.value,
-        tags: tags.value
+        tags: tags.value,
+        rating: rating.value,
+        done: done.checked,
+        wantToTry: wantToTry.checked
     };
 }
 
@@ -56,13 +62,16 @@ function displayValues(recipeData) {
     let cookingTime = document.getElementById('cookingTime');
     let prepTime = document.getElementById('prepTime');
     let storage = document.getElementById('storage');
-    let freezes = document.getElementById('freezes');
+    let freezable = document.getElementById('freezable');
     let calories = document.getElementById('calories');
     let protein = document.getElementById('protein');
     let carb = document.getElementById('carb');
     let fat = document.getElementById('fat');
     let tags = document.getElementById('tags');
+    let rating = document.getElementById('rating');
     let equipment = document.getElementById('equipment');
+    let done = document.getElementById('done');
+    let wantToTry = document.getElementById('wantToTry');
 
     title.value = recipeData.title;
     author.value = recipeData.author;
@@ -75,13 +84,16 @@ function displayValues(recipeData) {
     cookingTime.value = recipeData.cookingTime;
     prepTime.value = recipeData.prepTime;
     storage.value = recipeData.storage;
-    freezes.checked = recipeData.freezes;
-    calories.value = recipeData.macros.calories;
-    protein.value = recipeData.macros.protein;
-    carb.value = recipeData.macros.carbs;
-    fat.value = recipeData.macros.fat;
+    freezable.checked = recipeData.freezable;
+    calories.value = recipeData.nutrition.calories;
+    protein.value = recipeData.nutrition.protein;
+    carb.value = recipeData.nutrition.carbs;
+    fat.value = recipeData.nutrition.fat;
     equipment.value = recipeData.equipment;
     tags.value = recipeData.tags;
+    rating.value = recipeData.rating;
+    done.checked = recipeData.done;
+    wantToTry.checked = recipeData.wantToTry;
 }
 
 // Save the data from the form in local storage so it can be retrieved after popup closes
