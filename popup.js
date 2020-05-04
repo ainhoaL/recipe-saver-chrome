@@ -137,8 +137,13 @@ function onTabInfoLoaded(pageDetails) {
             if (xhr.status == 200) {
                 let data = xhr.responseText;
                 let jsonResponse = JSON.parse(data);
-                checkRecipeDisplay.innerHTML = 'This recipe is already saved<br /><a target="_blank" href="' + websiteRecipeUrl + jsonResponse._id + '">Open recipe in website</a>';
-                document.getElementById('saverecipeform').style.display = 'none'
+                if (jsonResponse && jsonResponse.recipes && jsonResponse.recipes.length === 1) {
+                    let responseRecipe = jsonResponse.recipes[0]
+                    if (responseRecipe._id) { // Just in case we ever get a response without _id
+                        checkRecipeDisplay.innerHTML = 'This recipe is already saved<br /><a target="_blank" href="' + websiteRecipeUrl + responseRecipe._id + '">Open recipe in website</a>';
+                        document.getElementById('saverecipeform').style.display = 'none'
+                    }
+                }
             } else if (xhr.status !== 404) { // 404 is not an error, just says the recipe does not exist in the database
                 checkRecipeDisplay.innerHTML = 'Error checking for recipe ' + xhr.status;
             }
