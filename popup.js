@@ -125,7 +125,7 @@ function onTabInfoLoaded(pageDetails) {
     let checkRecipeDisplay = document.getElementById('recipe-exists');
 
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', recipesUrl + '/search?url=' + url, true); // Check if recipe url has been saved already for this user
+    xhr.open('GET', recipesUrl + '?url=' + url, true); // Check if recipe url has been saved already for this user
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhr.setRequestHeader('Authorization', 'Bearer ' + userToken);
 
