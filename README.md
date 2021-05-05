@@ -1,11 +1,11 @@
 # recipe-saver-chrome
 
-Chrome extension to save recipes in [`sugar-salt-butter`](https://github.com/ainhoaL/sugar-salt-butter-ui): application to organize food recipes.
+Chrome extension to save recipes in [`sugar-salt-butter`](https://github.com/ainhoaL/sugar-salt-butter-ui), the application to organize food recipes.
 
 ## Setup
 - Setup [`sugar-salt-butter`](https://github.com/ainhoaL/sugar-salt-butter#setup) and [`sugar-salt-butter-ui`](https://github.com/ainhoaL/sugar-salt-butter-ui#setup) if wanting to see in the web UI the recipes saved.
-- Start [`sugar-salt-butter`] (https://github.com/ainhoaL/sugar-salt-butter#start) (and [`sugar-salt-butter-ui`](https://github.com/ainhoaL/sugar-salt-butter-ui#start-the-application) if needed).
-- In `recipe-saver-chrome/manifest.json`, set `oauth2.client_id` to ClientID obtained for the chrome extension in the [backend server setup step](https://github.com/ainhoaL/sugar-salt-butter#setup).
+- Start [`sugar-salt-butter`](https://github.com/ainhoaL/sugar-salt-butter#start-the-application) (and [`sugar-salt-butter-ui`](https://github.com/ainhoaL/sugar-salt-butter-ui#start-the-application) if needed).
+- In `recipe-saver-chrome/manifest.json`, set `oauth2.client_id` to the ClientID obtained for the chrome extension in the [backend server setup step](https://github.com/ainhoaL/sugar-salt-butter#setup).
 - Navigate to `chrome://extensions` in Chrome and load the unpacked extension. [More instructions in Chrome developer page](https://developer.chrome.com/docs/extensions/mv3/getstarted/#manifest).
 
 ## Usage
